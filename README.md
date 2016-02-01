@@ -28,6 +28,15 @@ bower install simpleeventcalendar
 <p>Lorem Ipsum är en utfyllnadstext från tryck- och förlagsindustrin. Lorem ipsum har varit standard ända sedan 1500-talet, när en okänd boksättare tog att antal bokstäver och blandade dem för att göra ett provexemplar av en bok.</p>
 <button class="read-more">Read more</button>
 </div>
+<!-- or load from json -->
+"events": [{
+  "month": "2",
+  "day": "12",
+  "year": "2016",
+  "title": "Lorem ipsum",
+  "description": "Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Nullam id dolor id nibh ultricies vehicula ut id elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras justo odio, dapibus ac facilisis in, egestas eget quam."
+  }]
+}
 ```
 
 ```javascript
