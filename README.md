@@ -30,12 +30,14 @@ bower install simpleeventcalendar
 </div>
 ```
 
-###Basic
-![alt tag](http://oi59.tinypic.com/2vkivxs.jpg)
 ###Personal list
 ![alt tag](http://oi62.tinypic.com/dmbq86.jpg)
 
+###JSON example
+![alt tag](http://oi68.tinypic.com/4pwqo9.jpg)
+
 ###Updates
+* Load events from external json file
 * YEAR SUPPORT
 * Add custom classes to each event
 * List days automatically based on month
