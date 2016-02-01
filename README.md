@@ -21,7 +21,7 @@ bower install simpleeventcalendar
 <script src="style.css"></script>
 
 <!-- and all you'll need to do is add some divs for event-->
-<div class="day-event" date-month="12" date-day="16" data-number="1">
+<div class="day-event" date-month="2" date-day="16" date-year="2016" data-number="1">
 <a href="#" class="close fontawesome-remove"></a>
 <h2 class="title">Lorem ipsum 3</h2>
 <span class="date">2014-12-16</span>
@@ -29,6 +29,19 @@ bower install simpleeventcalendar
 <button class="read-more">Read more</button>
 </div>
 ```
+
+```javascript
+<!-- or load from json -->
+"events": [{
+  "month": "2",
+  "day": "12",
+  "year": "2016",
+  "title": "Lorem ipsum",
+  "description": "Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Nullam id dolor id nibh ultricies vehicula ut id elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras justo odio, dapibus ac facilisis in, egestas eget quam."
+  }]
+}
+```
+
 
 ###Personal list
 ![alt tag](http://oi62.tinypic.com/dmbq86.jpg)
