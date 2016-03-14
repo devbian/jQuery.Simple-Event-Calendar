@@ -4,42 +4,42 @@ var calendar = {
 
 		if (ajax) {
 
-      // ajax call to print json
-      $.ajax({
-  				url: 'data/events.json',
-  				type: 'GET',
-  			})
-  			.done(function(data) {
-          var events = data.events;
+			// ajax call to print json
+			$.ajax({
+					url: 'data/events.json',
+					type: 'GET',
+				})
+				.done(function(data) {
+					var events = data.events;
 
-          // loop json & append to dom
-          for (var i = 0; i < events.length; i++) {
-            $('.list').append('<div class="day-event" date-day="'+ events[i].day +'" date-month="' + events[i].month +'" date-year="'+ events[i].year +'" data-number="'+ i +'"><a href="#" class="close fontawesome-remove"></a><h2 class="title">'+ events[i].title +'</h2><p>'+ events[i].description +'</p><label class="check-btn"><input type="checkbox" class="save" id="save" name="" value=""/><span>Save to personal list!</span></label></div>');
-          }
+					// loop json & append to dom
+					for (var i = 0; i < events.length; i++) {
+						$('.list').append('<div class="day-event" event-class="' + events[i].class + '" date-day="' + events[i].day + '" date-month="' + events[i].month + '" date-year="' + events[i].year + '" data-number="' + i + '"><a href="#" class="close fontawesome-remove"></a><h2 class="title">' + events[i].title + '</h2><p>' + events[i].description + '</p><label class="check-btn"><input type="checkbox" class="save" id="save" name="" value=""/><span>Save to personal list!</span></label></div>');
+					}
 
-          // start calendar
-          calendar.startCalendar();
+					// start calendar
+					calendar.startCalendar();
 
-  			})
-  			.fail(function(data) {
-  				console.log(data);
-  			});
+				})
+				.fail(function(data) {
+					console.log(data);
+				});
 		} else {
 
-      // if not using ajax start calendar
-      calendar.startCalendar();
-    }
+			// if not using ajax start calendar
+			calendar.startCalendar();
+		}
 
 	},
 
-  startCalendar: function() {
-    var mon = 'Mon';
-		var tue = 'Tue';
-		var wed = 'Wed';
-		var thur = 'Thur';
-		var fri = 'Fri';
-		var sat = 'Sat';
-		var sund = 'Sun';
+	startCalendar: function() {
+		var mon = '周一';
+		var tue = '周二';
+		var wed = '周三';
+		var thur = '周四';
+		var fri = '周五';
+		var sat = '周六';
+		var sund = '周日';
 
 		/**
 		 * Get current date
@@ -53,7 +53,8 @@ var calendar = {
 		var monthNumber = d.getMonth() + 1;
 
 		function GetMonthName(monthNumber) {
-			var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+			//var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+			var months = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];
 			return months[monthNumber - 1];
 		}
 
@@ -64,7 +65,7 @@ var calendar = {
 			$('.month').attr('data-month', monthNumber);
 			printDateNumber(monthNumber, mon, tue, wed, thur, fri, sat, sund);
 		}
-
+		$('.calendar  tr td, .calendar  tr th').width(($('.calendar header').width() - 50) / 7);
 		$('.btn-next').on('click', function(e) {
 			var monthNumber = $('.month').attr('data-month');
 			if (monthNumber > 11) {
@@ -118,38 +119,35 @@ var calendar = {
 
 			setDaysInOrder(mon, tue, wed, thur, fri, sat, sund);
 
+			var monthDay = getDaysInMonth(monthNumber - 1, yearNumber)[0].toString().substring(0, 3);
+			var weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+			var firstDay = weekDays.indexOf(monthDay);
+
 			function setDaysInOrder(mon, tue, wed, thur, fri, sat, sund) {
-				var monthDay = getDaysInMonth(monthNumber - 1, yearNumber)[0].toString().substring(0, 3);
-				if (monthDay === 'Mon') {
-					$('thead.event-days tr').append('<td>' + mon + '</td><td>' + tue + '</td><td>' + wed + '</td><td>' + thur + '</td><td>' + fri + '</td><td>' + sat + '</td><td>' + sund + '</td>');
-				} else if (monthDay === 'Tue') {
-					$('thead.event-days tr').append('<td>' + tue + '</td><td>' + wed + '</td><td>' + thur + '</td><td>' + fri + '</td><td>' + sat + '</td><td>' + sund + '</td><td>' + mon + '</td>');
-				} else if (monthDay === 'Wed') {
-					$('thead.event-days tr').append('<td>' + wed + '</td><td>' + thur + '</td><td>' + fri + '</td><td>' + sat + '</td><td>' + sund + '</td><td>' + mon + '</td><td>' + tue + '</td>');
-				} else if (monthDay === 'Thu') {
-					$('thead.event-days tr').append('<td>' + thur + '</td><td>' + fri + '</td><td>' + sat + '</td><td>' + sund + '</td><td>' + mon + '</td><td>' + tue + '</td><td>' + wed + '</td>');
-				} else if (monthDay === 'Fri') {
-					$('thead.event-days tr').append('<td>' + fri + '</td><td>' + sat + '</td><td>' + sund + '</td><td>' + mon + '</td><td>' + tue + '</td><td>' + wed + '</td><td>' + thur + '</td>');
-				} else if (monthDay === 'Sat') {
-					$('thead.event-days tr').append('<td>' + sat + '</td><td>' + sund + '</td><td>' + mon + '</td><td>' + tue + '</td><td>' + wed + '</td><td>' + thur + '</td><td>' + fri + '</td>');
-				} else if (monthDay === 'Sun') {
-					$('thead.event-days tr').append('<td>' + sund + '</td><td>' + mon + '</td><td>' + tue + '</td><td>' + wed + '</td><td>' + thur + '</td><td>' + fri + '</td><td>' + sat + '</td>');
-				}
+				//$('thead.event-days tr').append('<td>' + mon + '</td><td>' + tue + '</td><td>' + wed + '</td><td>' + thur + '</td><td>' + fri + '</td><td>' + sat + '</td><td>' + sund + '</td>');
+				$('thead.event-days tr').html('<td>' + mon + '</td><td>' + tue + '</td><td>' + wed + '</td><td>' + thur + '</td><td>' + fri + '</td><td>' + sat + '</td><td>' + sund + '</td>');
 			};
+
+			var item = 0;
+			var tr = $('<tr></tr>');
+			$('tbody.event-calendar').append(tr);
+
+			for (var i = 0; i < firstDay; i++) {
+				//$('tbody.event-calendar tr').append('<td></td>');
+				tr.append('<td></td>');
+				item++;
+			}
+
 			$(getDaysInMonth(monthNumber - 1, yearNumber)).each(function(index) {
-				var index = index + 1;
-				if (index < 8) {
-					$('tbody.event-calendar tr.1').append('<td date-month="' + monthNumber + '" date-day="' + index + '" date-year="' + yearNumber + '">' + index + '</td>');
-				} else if (index < 15) {
-					$('tbody.event-calendar tr.2').append('<td date-month="' + monthNumber + '" date-day="' + index + '" date-year="' + yearNumber + '">' + index + '</td>');
-				} else if (index < 22) {
-					$('tbody.event-calendar tr.3').append('<td date-month="' + monthNumber + '" date-day="' + index + '" date-year="' + yearNumber + '">' + index + '</td>');
-				} else if (index < 29) {
-					$('tbody.event-calendar tr.4').append('<td date-month="' + monthNumber + '" date-day="' + index + '" date-year="' + yearNumber + '">' + index + '</td>');
-				} else if (index < 32) {
-					$('tbody.event-calendar tr.5').append('<td date-month="' + monthNumber + '" date-day="' + index + '" date-year="' + yearNumber + '">' + index + '</td>');
+				if (item % 7 === 0) {
+					tr = $('<tr></tr>');
+					$('tbody.event-calendar').append(tr);
 				}
+				var monthDay = getDaysInMonth(monthNumber - 1, yearNumber)[0].toString().substring(0, 3);
+				var index = index + 1;
+				tr.append('<td date-month="' + monthNumber + '" date-day="' + index + '" date-year="' + yearNumber + '">' + index + '</td>');
 				i++;
+				item++;
 			});
 			var date = new Date();
 			var month = date.getMonth() + 1;
@@ -175,6 +173,7 @@ var calendar = {
 		/**
 		 * Add class '.active' on calendar date
 		 */
+		/*
 		$('tbody td').on('click', function(e) {
 			if ($(this).hasClass('event')) {
 				$('tbody.event-calendar td').removeClass('active');
@@ -183,6 +182,7 @@ var calendar = {
 				$('tbody.event-calendar td').removeClass('active');
 			};
 		});
+		*/
 
 		/**
 		 * Add '.event' class to all days that has an event
@@ -285,7 +285,12 @@ var calendar = {
 		$('.print-btn').click(function() {
 			window.print();
 		});
-  },
+
+		$('.today').click(function() {
+			yearNumber = new Date().getFullYear();
+			setMonth(monthNumber, mon, tue, wed, thur, fri, sat, sund);
+		});
+	},
 
 };
 

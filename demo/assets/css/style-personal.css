@@ -80,18 +80,20 @@ table {
     float: left;
 }
 
-.current-day {
-    background: #c0392b;
-    color: #f9f9f9;
+.calendar .today{
+    cursor: pointer;
 }
 
-.event {
+.calendar .current-day {
+    border:2px solid #4351A1;
+}
+
+.done, .event {
     cursor: pointer;
     position: relative;
 }
 
-.event:after {
-    background: #c0392b;
+.done:after, .event:after {
     border-radius: 50%;
     bottom: 8px;
     display: block;
@@ -103,28 +105,42 @@ table {
     width: 8px;
 }
 
+.event:after{
+    background: #c0392b;
+}
+.done:after{
+    background: #1AAF5D;
+}
+
+/*
 .event.current-day:after {
     background: #f9f9f9;
 }
+*/
 
 .btn-prev,
 .btn-next {
-	border: 2px solid #cbd1d2;
-	border-radius: 50%;
-	color: #cbd1d2;
-	height: 32px;
-	font-size: 22px;
-	line-height: 28px;
-	margin: -16px;
-	position: absolute;
-	top: 50%;
-	width: 32px;
+    color: #cbd1d2;
+    height: 32px;
+    font-size: 22px;
+    line-height: 28px;
+    margin: -16px;
+    position: absolute;
+    top: 50%;
+    width: 32px;
+    text-decoration:none;
 }
 
 .btn-prev:hover,
 .btn-next:hover {
     background: #cbd1d2;
     color: #f9f9f9;
+    text-decoration:none;
+}
+
+.btn-prev:visited,
+.btn-next:visited{
+    text-decoration: none;
 }
 
 .btn-prev {
