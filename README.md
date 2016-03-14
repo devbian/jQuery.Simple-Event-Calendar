@@ -1,3 +1,6 @@
+改成中文版,并修复一些bug
+比如:原source里面的日历大小是固定的
+原日历的每周会根据每月的不同而改变
 jQuery.Simple-Event-Calendar
 ================
 
